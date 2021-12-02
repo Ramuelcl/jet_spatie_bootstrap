@@ -1,6 +1,15 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+// página de inicio
+use App\Http\Controllers\HomeController;
+// control de usuarios
+use Illuminate\Support\Facades\Auth;
+use App\Http\Controllers\Admin\RolController;
+use App\Http\Controllers\Admin\UsuarioController;
+
+// paginas del sistema ...
+// ...
 
 /*
 |--------------------------------------------------------------------------
@@ -13,10 +22,15 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+// Route::get('/', function () {
+//     return view('welcome');
+// });
 
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Route::get('/', [HomeController::class, 'index'])->name('home');
 
 Auth::routes();
+
+Route::group(['middleware'=>['auth']], function () {
+    Route::resource('roles', RolController::class);
+    Route::resource('usuarios', UsuarioController::class);
+});
