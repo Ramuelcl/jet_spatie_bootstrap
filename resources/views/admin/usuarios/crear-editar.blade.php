@@ -4,7 +4,7 @@ $roles = isset($datos['roles']) ? $datos['roles'] : null;
 $permisos = isset($datos['permisos']) ? $datos['permisos'] : null;
 $userRoles = isset($datos['userRole']) ? $datos['userRole'] : null;
 $userPerms = isset($datos['userPerm']) ? $datos['userPerm'] : null;
-// dd([$user, $roles, $permisos]);
+dd([$user, $roles, $permisos]);
 if (!is_null($user)) {
     $new = true;
 } else {

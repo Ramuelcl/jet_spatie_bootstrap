@@ -7,6 +7,7 @@ use App\Http\Controllers\HomeController;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\Admin\RolController;
 use App\Http\Controllers\Admin\UsuarioController;
+use App\Http\Controllers\EmpleadoController;
 
 // paginas del sistema ...
 // ...
@@ -27,8 +28,27 @@ use App\Http\Controllers\Admin\UsuarioController;
 // });
 
 Route::get('/', [HomeController::class, 'index'])->name('home');
+/*
+Route::get(
+    '/empleado',
+    function () {
+        return view('empleado.index');
+    }
+);
+
+Route::get(
+    '/empleado/create',
+    [EmpleadoController::class,'create']
+);
+*/
+// cambiamos por resource
+Route::resource('empleado', EmpleadoController::class);
+// si quisieramos con autenticacion usamos...
+// Route::resource('empleado', EmpleadoController::class)->middleware('auth');
 
 Auth::routes();
+// eliminar opciones en la pantalla de login
+// Auth::routes(['register'=>false,'reset'=>false]);
 
 Route::group(['middleware'=>['auth']], function () {
     Route::resource('roles', RolController::class);
