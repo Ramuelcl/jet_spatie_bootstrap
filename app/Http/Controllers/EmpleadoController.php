@@ -53,7 +53,7 @@ class EmpleadoController extends Controller
 
         $datos=\request()->except('_token');
         if ($request->hasFile('Foto')) {
-            $datos['Foto']=$request->file('Foto')->store('uploads', 'public');
+            $datos['Foto']=$request->file('Foto')->store('images', 'public');
         }
         // dd($datos);
         Empleado::insert($datos);
@@ -115,7 +115,7 @@ class EmpleadoController extends Controller
         if ($request->hasFile('Foto')) {
             $empleado=Empleado::findOrFail($id);
             Storage::delete('public/'.$empleado->Foto);
-            $datos['Foto']=$request->file('Foto')->store('uploads', 'public');
+            $datos['Foto']=$request->file('Foto')->store('images', 'public');
         }
 
         Empleado::where('id', '=', $id)->update($datos);

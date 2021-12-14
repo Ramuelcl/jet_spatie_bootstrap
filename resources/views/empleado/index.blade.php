@@ -32,8 +32,7 @@
                  <tr>
                      <td>{{ $empleado->id }} </td>
                      <td>
-                         <img src="{{ asset('storage' . '/' . $empleado->Foto) }}" alt=":(" width="50" height="50"
-                             class="img-thumbnail img-fluid">
+                         <img src="{{ $empleado->Foto }}" alt=":(" width="50" height="50" class="img-thumbnail img-fluid">
                      </td>
                      <td>{{ $empleado->Nombre }}</td>
                      <td>{{ $empleado->ApellidoPaterno }}</td>
