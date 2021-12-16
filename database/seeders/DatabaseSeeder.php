@@ -19,7 +19,7 @@ class DatabaseSeeder extends Seeder
     {
         // Storage::deleteDirectory('public/images');
         // Storage::makeDirectory('public/images');
-        $folder = public_path('images');
+        $folder ='public/storage/images';// public_path('images');
         if (!File::exists($folder)) {
             File::makeDirectory($folder, 0755, true, true);
         } else {
