@@ -13,10 +13,12 @@ class EmpleadoController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index($pag=5)
+    public function index($pag=6)
     {
         $datos['empleados']=Empleado::paginate($pag);
-        return view('empleado.index', compact('datos'));
+        return view('empleado.index')->
+        with('datos', $datos);
+        ;
     }
 
     /**
@@ -81,7 +83,9 @@ class EmpleadoController extends Controller
     public function edit(int $id=0)
     {
         $empleado=Empleado::findOrFail($id);
-        return \view('empleado.edit', \compact('empleado'));
+        // return \view('empleado.edit', \compact('empleado'));
+        return \view('empleado.edit')->
+        with('empleado', $empleado);
     }
 
     /**

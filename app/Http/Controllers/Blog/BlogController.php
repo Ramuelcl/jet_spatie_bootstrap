@@ -1,8 +1,9 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Blog;
 
 use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
 
 use App\Models\Blog;
 
@@ -10,21 +11,21 @@ class BlogController extends Controller
 {
     public function __construct()
     {
-        $this->middleware('role:user|writer|moderator|admin')->
-            only('index');
-        $this->middleware('role:writer')->
-            only(['create','store']);
-        $this->middleware('role:moderator')->
-            only(['edit','update']);
-        $this->middleware('role:writer|moderator')->
-            only(['destroy']);
+        // $this->middleware('role:user|writer|moderator|admin')->
+        //     only('index');
+        // $this->middleware('role:writer')->
+        //     only(['create','store']);
+        // $this->middleware('role:moderator')->
+        //     only(['edit','update']);
+        // $this->middleware('role:writer|moderator')->
+        //     only(['destroy']);
 
-        $this->middleware('permission:new')->
-            only(['create', 'store']);
-        $this->middleware('permission:edit')->
-            only(['edit', 'update']);
-        $this->middleware('permission:delete')->
-            only(['destroy']);
+        // $this->middleware('permission:new')->
+        //     only(['create', 'store']);
+        // $this->middleware('permission:edit')->
+        //     only(['edit', 'update']);
+        // $this->middleware('permission:delete')->
+        //     only(['destroy']);
     }
     /**
      * Display a listing of the resource.
@@ -34,7 +35,9 @@ class BlogController extends Controller
     public function index()
     {
         //Con paginación
-        $blogs = Blog::paginate(5);
+        // $blogs = Blog::paginate(5);
+        $blogs = Blog::all();
+        // dd($blogs);
         return view('blogs.index', compact('blogs'));
         //al usar esta paginacion, recordar poner en el el index.blade.php este codigo  {!! $blogs->links() !!}
     }

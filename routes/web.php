@@ -1,13 +1,14 @@
 <?php
 
-use Illuminate\Support\Facades\Route;
-// página de inicio
-use App\Http\Controllers\HomeController;
-// control de usuarios
 use Illuminate\Support\Facades\Auth;
+// página de inicio
+use Illuminate\Support\Facades\Route;
+// control de usuarios
+use App\Http\Controllers\Blog\BlogController;
+use App\Http\Controllers\HomeController;
+use App\Http\Controllers\EmpleadoController;
 use App\Http\Controllers\Admin\RolController;
 use App\Http\Controllers\Admin\UsuarioController;
-use App\Http\Controllers\EmpleadoController;
 
 // paginas del sistema ...
 // ...
@@ -28,6 +29,24 @@ use App\Http\Controllers\EmpleadoController;
 // });
 
 Route::get('/', [HomeController::class, 'index'])->name('home');
+
+Route::get('/contact', function () {
+    return view('contact.contact');
+})->name('contact');
+
+Route::get('/faker', function () {
+    return view('pags.faker');
+})->name('faker');
+
+Route::get('/iconos', function () {
+    return view('pags.iconos');
+})->name('iconos');
+
+Route::get('/bootstrap', function () {
+    return view('pags.bootstrap');
+})->name('bootstrap');
+
+
 /*
 Route::get(
     '/empleado',
@@ -45,6 +64,8 @@ Route::get(
 Route::resource('empleado', EmpleadoController::class);
 // si quisieramos con autenticacion usamos...
 // Route::resource('empleado', EmpleadoController::class)->middleware('auth');
+
+Route::resource('blog', BlogController::class);
 
 Auth::routes();
 // eliminar opciones en la pantalla de login

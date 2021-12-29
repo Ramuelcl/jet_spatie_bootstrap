@@ -11,9 +11,9 @@
          </button>
        </div>
      @endif
-     @php
+     {{-- @php
        $empleados = $datos['empleados'];
-     @endphp
+     @endphp --}}
      <a href="{{ url('empleado/create') }}" class="btn btn-success btn-block">Nuevo</a>
 
      <table class="table table-light">
@@ -29,9 +29,9 @@
          </tr>
        </thead>
        <tbody>
-         @foreach ($empleados as $empleado)
+         @foreach ($datos['empleados'] as $empleado)
            <tr>
-             <td>{{ $empleado->id }} </td>
+             <td class="d--none">{{ $empleado->id }} </td>
              <td>
                <img src="/storage/images/{{ $empleado->Foto }}" alt="/storage/images/{{ $empleado->Foto }} :("
                  width="50" height="50" class="img-thumbnail img-fluid">
@@ -54,7 +54,7 @@
          @endforeach
        </tbody>
      </table>
-     {!! $empleados->onEachSide(1)->links() !!}
+     {!! $datos['empleados']->onEachSide(1)->links() !!}
 
    </div>
  @endsection
