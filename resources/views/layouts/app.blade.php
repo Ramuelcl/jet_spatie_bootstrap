@@ -1,52 +1,68 @@
 <!DOCTYPE html>
-<html>
+<html lang="es">
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="csrf-token" content="{{ csrf_token() }}"/>
-    <title>@yield('title') | {{ config('app.name') }}</title>
-    <meta content='width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no' name='viewport'>
-    <!-- Bootstrap 4.1.1 -->
-    <link href="{{ asset('assets/css/bootstrap.min.css') }}" rel="stylesheet" type="text/css"/>
-    <!-- Ionicons -->
-    <link href="//fonts.googleapis.com/css?family=Lato&display=swap" rel="stylesheet">
-    <link href="{{ asset('assets/css/@fortawesome/fontawesome-free/css/all.css') }}" rel="stylesheet" type="text/css">
-    <link rel="stylesheet" href="{{ asset('assets/css/iziToast.min.css') }}">
-    <link href="{{ asset('assets/css/sweetalert.css') }}" rel="stylesheet" type="text/css"/>
-    <link href="{{ asset('assets/css/select2.min.css') }}" rel="stylesheet" type="text/css"/>
+  <meta charset="UTF-8">
 
-@yield('page_css')
-<!-- Template CSS -->
-    <link rel="stylesheet" href="{{ asset('web/css/style.css') }}">
-    <link rel="stylesheet" href="{{ asset('web/css/components.css')}}">
-    @yield('page_css')
+  <meta name="csrf-token" content="{{ csrf_token() }}" />
+  <title>@yield('title') | {{ config('app.name', 'Falta Título') }}</title>
+  <meta content='width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no' name='viewport'>
+
+  <!-- Bootstrap 4.1.1 -->
+  <link href="{{ asset('assets/css/bootstrap.min.css') }}" rel="stylesheet" type="text/css" />
+
+  <!-- Ionicons -->
+  <link href="//fonts.googleapis.com/css?family=Lato&display=swap" rel="stylesheet">
+
+  <link href="{{ asset('assets/css/@fortawesome/fontawesome-free/css/all.css') }}" rel="stylesheet" type="text/css">
+
+  <link rel="stylesheet" href="{{ asset('assets/css/iziToast.min.css') }}">
+
+  <link href="{{ asset('assets/css/sweetalert.css') }}" rel="stylesheet" type="text/css" />
+
+  <link href="{{ asset('assets/css/select2.min.css') }}" rel="stylesheet" type="text/css" />
+
+  {{-- @yield('page_css') --}}
+  <!-- Template CSS -->
+  <link rel="stylesheet" href="{{ asset('web/css/style.css') }}">
+  <link rel="stylesheet" href="{{ asset('web/css/components.css') }}">
+  @yield('page_css')
 
 
-    @yield('css')
+  @yield('css')
+
+
+  {{-- mio --}}
+  <link rel="stylesheet" href="{{ asset('css/app.css') }}">
+  {{-- mio --}}
 </head>
+
 <body>
 
-<div id="app">
+  <div id="app">
     <div class="main-wrapper main-wrapper-1">
-        <div class="navbar-bg"></div>
-        <nav class="navbar navbar-expand-lg main-navbar">
-            @include('layouts.header')
+      <div class="navbar-bg"></div>
+      <nav class="navbar navbar-expand-md main-navbar">
+        @include('layouts.partials.header')
 
-        </nav>
-        <div class="main-sidebar main-sidebar-postion">
-            @include('layouts.sidebar')
-        </div>
-        <!-- Main Content -->
-        <div class="main-content">
-            @yield('content')
-        </div>
-        <footer class="main-footer">
-            @include('layouts.footer')
-        </footer>
+      </nav>
+      <div class="main-sidebar main-sidebar-position">
+        @include('layouts.partials.sidebar')
+      </div>
+
+      <!-- Main Content -->
+      <div class="main-content">
+        @yield('content')
+      </div>
+
+      <footer class="main-footer">
+        @include('layouts.partials.footer')
+      </footer>
     </div>
-</div>
+  </div>
 
-@include('profile.change_password')
-@include('profile.edit_profile')
+  @include('profile.change_password')
+  @include('profile.edit_profile')
 
 </body>
 <script src="{{ asset('assets/js/jquery.min.js') }}"></script>
@@ -62,21 +78,27 @@
 <script src="{{ asset('web/js/scripts.js') }}"></script>
 <script src="{{ mix('assets/js/profile.js') }}"></script>
 <script src="{{ mix('assets/js/custom/custom.js') }}"></script>
+
+{{-- mio --}}
+<script src="{{ asset('js/app.js') }}"></script>
+{{-- mio --}}
+
 @yield('page_js')
 @yield('scripts')
 <script>
-    let loggedInUser =@json(\Illuminate\Support\Facades\Auth::user());
-    let loginUrl = '{{ route('login') }}';
-    // Loading button plugin (removed from BS4)
-    (function ($) {
-        $.fn.button = function (action) {
-            if (action === 'loading' && this.data('loading-text')) {
-                this.data('original-text', this.html()).html(this.data('loading-text')).prop('disabled', true);
-            }
-            if (action === 'reset' && this.data('original-text')) {
-                this.html(this.data('original-text')).prop('disabled', false);
-            }
-        };
-    }(jQuery));
+  let loggedInUser = @json(\Illuminate\Support\Facades\Auth::user());
+  let loginUrl = '{{ route('login') }}';
+  // Loading button plugin (removed from BS4)
+  (function($) {
+    $.fn.button = function(action) {
+      if (action === 'loading' && this.data('loading-text')) {
+        this.data('original-text', this.html()).html(this.data('loading-text')).prop('disabled', true);
+      }
+      if (action === 'reset' && this.data('original-text')) {
+        this.html(this.data('original-text')).prop('disabled', false);
+      }
+    };
+  }(jQuery));
 </script>
+
 </html>

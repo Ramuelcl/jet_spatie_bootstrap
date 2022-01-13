@@ -83,7 +83,7 @@ class RolController extends Controller
      */
     public function edit($id)
     {
-        $datos['role'] = Role::findById($id);
+        $datos['role'] = Role::find($id);
         $datos['permission'] = Permission::get();
         $datos['rolePermissions'] = DB::table('role_has_permissions')->where('role_has_permissions.role_id', '=', $id)
         ->pluck('role_has_permissions.permission_id', 'role_has_permissions.permission_id')
